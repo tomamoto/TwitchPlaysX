@@ -42,6 +42,15 @@ let defaultKeyMap = config.keymap || {
   select: "e",
 };
 
+function keyUp() {
+  exec(
+    "xdotool keyup --window " +
+    windowID +
+    " " +
+    key
+  )
+}
+
 function sendKey(command) {
   //if doesn't match the filtered words
   if (!command.match(regexFilter)) {
@@ -72,14 +81,7 @@ function sendKey(command) {
             " " +
             key
         );
-        setTimeout(
-          exec(
-            "xdotool keyup --window " +
-            windowID +
-            " " +
-            key
-          )
-        , holdTime);
+        setTimeout(keyUp , holdTime);
       }
     }
   }
