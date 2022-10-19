@@ -1,3 +1,5 @@
+const { holdTime } = require("./config.js");
+
 let exec = require("child_process").exec,
   config = require("./config.js"),
   lastTime = {},
@@ -63,13 +65,21 @@ function sendKey(command) {
       } else {
         //Send to preset window under non-windows systems
         exec(
-          "xdotool key --window " +
+          "xdotool keydown --window " +
             windowID +
             " --delay " +
             config.delay +
             " " +
             key
         );
+        setTimeout(
+          exec(
+            "xdotool keyup --window " +
+            windowID +
+            " " +
+            key
+          )
+        , holdTime);
       }
     }
   }

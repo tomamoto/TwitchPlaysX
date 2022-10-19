@@ -44,4 +44,8 @@ module.exports = {
   // Delay between each possible keypress in milliseconds (can't be too fast)
   // To change on Windows, change `key.py`
   delay: 100,
+
+  // Length in milliseconds to hold down all keys. 
+  // May have to break this out into something more complicated if we have to treat dpad and buttons differently
+  holdTime: 300,
 };
