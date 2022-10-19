@@ -48,7 +48,7 @@ function keyUp(key) {
     windowID +
     " " +
     key
-  )
+  );
 }
 
 function sendKey(command) {
