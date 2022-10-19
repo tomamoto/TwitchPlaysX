@@ -81,7 +81,7 @@ function sendKey(command) {
             " " +
             key
         );
-        setTimeout(keyUp(key) , holdTime);
+        setTimeout(keyUp, holdTime, key);
       }
     }
   }
