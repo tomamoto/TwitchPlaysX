@@ -1,5 +1,3 @@
-const { holdTime } = require("./config.js");
-
 let exec = require("child_process").exec,
   config = require("./config.js"),
   lastTime = {},
