@@ -66,13 +66,13 @@ function sendKey(command) {
           "xdotool keydown --window " +
             windowID +
             " --delay " +
-            config.delay +
+            config.holdTime +
             " " +
             key +
             " keyup --window " +
             windowID +
             " --delay " +
-            config.holdTime +
+            config.delay +
             " " +
             key
         );
