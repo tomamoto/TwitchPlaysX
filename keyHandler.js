@@ -40,6 +40,15 @@ let defaultKeyMap = config.keymap || {
   select: "e",
 };
 
+let dpadDirections = ["up", "down", "left", "right"];
+
+function isDpad(command) {
+  if (dpadDirections.includes(command)) {
+    return true;
+  }
+  return false;
+}
+
 function sendKey(command) {
   //if doesn't match the filtered words
   if (!command.match(regexFilter)) {
@@ -62,20 +71,31 @@ function sendKey(command) {
         exec("python key.py" + "  " + config.programName + " " + key);
       } else {
         //Send to preset window under non-windows systems
-        exec(
-          "xdotool keydown --window " +
-            windowID +
-            " --delay " +
-            config.holdTime +
-            " " +
-            key +
-            " keyup --window " +
+        if (isDpad(command)) { // Hold key if it is a dpad key
+          exec(
+            "xdotool keydown --window " +
+              windowID +
+              " --delay " +
+              config.holdTime +
+              " " +
+              key +
+              " keyup --window " +
+              windowID +
+              " --delay " +
+              config.delay +
+              " " +
+              key
+          );
+        } else { // simply press key if it is not a dpad key
+          exec(
+            "xdotool key --window " +
             windowID +
             " --delay " +
             config.delay +
             " " +
             key
-        );
+          );
+        }
       }
     }
   }
