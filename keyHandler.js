@@ -34,16 +34,37 @@ let defaultKeyMap = config.keymap || {
   right: "Right",
   a: "a",
   b: "b",
+  holda: "a",
+  unholda: "a",
+  holdb: "b",
+  unholdb: "b",
   x: "x",
   y: "y",
   start: "s",
   select: "e",
 };
 
+// Key categories used to determine xdotool logic
 let dpadDirections = ["up", "down", "left", "right"];
+let holds = ["holda", "holdb"]
+let unholds = ["unholda", "unholdb"]
 
 function isDpad(command) {
   if (dpadDirections.includes(command)) {
+    return true;
+  }
+  return false;
+}
+
+function isHold(command) {
+  if (holds.includes(command)) {
+    return true;
+  }
+  return false;
+}
+
+function isUnhold(command) {
+  if (unholds.includes(command)) {
     return true;
   }
   return false;
@@ -80,6 +101,24 @@ function sendKey(command) {
               " " +
               key +
               " keyup --window " +
+              windowID +
+              " --delay " +
+              config.delay +
+              " " +
+              key
+          );
+        } else if (isHold(command)) {
+          exec(
+            "xdotool keydown --window " +
+              windowID +
+              " --delay " +
+              config.delay +
+              " " +
+              key
+          );
+        } else if (isUnhold(command)) {
+          exec(
+            "xdotool keyup --window " +
               windowID +
               " --delay " +
               config.delay +

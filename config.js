@@ -13,6 +13,10 @@ let commands = [
   "select",
   "a",
   "b",
+  "holda",
+  "unholda",
+  "holdb",
+  "unholdb",
   "democracy",
   "anarchy",
 ];
